@@ -1,24 +1,14 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { ArrowRight, ArrowUpRight, MapPin } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import architecture from '@/assets/architecture.jpg';
+import { AboutSection, SkillsSection, ProjectsSection, EducationSection, ContactSection, portfolioHead } from '@/components/portfolio';
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute('/')({
+  head: () => portfolioHead('Business student & aspiring MBA candidate', 'Meet Jai Fatehpuria, a first-year BBA student at JECRC University, Jaipur, interested in Business Analytics and Marketing.'),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+  return <main><section className="hero"><img className="hero-image" src={architecture} alt="Minimal white architectural staircase against a blue sky" width={1536} height={1024}/><div className="page-width hero-inner reveal"><div className="eyebrow"><span className="eyebrow-dot"/> Business student. Curious thinker.</div><h1>Hi, I'm Jai<br/><span>Fatehpuria.</span></h1><p className="hero-description">A first-year BBA student at JECRC University,<br className="hidden sm:block"/> exploring the world of business, data, and ideas.</p><div className="interest-line">Interested in <span>Business Analytics</span><span>·</span><span>Marketing</span></div><div className="hero-actions"><Button asChild><Link to="/projects">View Projects <ArrowUpRight/></Link></Button><Button asChild variant="outline"><Link to="/contact">Contact <ArrowRight/></Link></Button></div><div className="hero-location"><MapPin size={13}/> Jaipur, India <span className="mx-1">·</span> JECRC University</div></div></section><AboutSection/><SkillsSection/><ProjectsSection/><EducationSection/><ContactSection/></main>;
 }

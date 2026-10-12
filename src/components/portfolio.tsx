@@ -1,0 +1,49 @@
+import { Link } from '@tanstack/react-router';
+import { useState } from 'react';
+import { ArrowRight, ArrowUpRight, BookOpen, GraduationCap, Github, Linkedin, Mail, MapPin, Menu, Mic, Users, X, FolderOpen } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+
+const pages = [ ['Home', '/'], ['About', '/about'], ['Skills', '/skills'], ['Projects', '/projects'], ['Education', '/education'], ['Contact', '/contact'] ] as const;
+
+export function PortfolioHeader() {
+  const [open, setOpen] = useState(false);
+  return <header className="site-header"><div className="page-width nav-inner">
+    <Link to="/" className="wordmark" aria-label="Jai Fatehpuria home" onClick={() => setOpen(false)}>Jai<span>.</span></Link>
+    <nav aria-label="Main navigation" className={`nav-links ${open ? 'is-open' : ''}`}>
+      {pages.map(([label, path]) => <Link key={path} to={path} activeOptions={{ exact: true }} className="nav-link" onClick={() => setOpen(false)}>{label}</Link>)}
+    </nav>
+    <Button variant="ghost" size="icon" className="menu-toggle" aria-label={open ? 'Close navigation' : 'Open navigation'} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</Button>
+  </div></header>;
+}
+
+export function PortfolioFooter() {
+  return <footer className="site-footer"><div className="page-width footer-inner"><Link to="/" className="footer-brand">Jai Fatehpuria<span className="text-primary">.</span></Link><span>Business student · Jaipur, India</span><a href="mailto:fatehpuriajai@gmail.com" aria-label="Email Jai"><Mail size={16}/></a></div></footer>;
+}
+
+export function AboutSection({ full = false }: { full?: boolean }) {
+  return <section className="section"><div className="page-width about-grid"><div><div className="section-label">01 / About me</div><h2>A curious mind.<br/>A business perspective.</h2>{!full && <Link to="/about" className="text-link mt-6">More about me <ArrowUpRight size={15}/></Link>}</div><div><p className="body-copy">I'm Jai, a first-year Bachelor of Business Administration student at JECRC University in Jaipur. My interests lie at the intersection of Business Analytics and Marketing.</p><p className="body-copy">I'm building my foundation in business, with a long-term goal of pursuing an MBA from a reputed institution.</p><div className="fact-row"><GraduationCap size={22}/><div><strong>BBA · JECRC University</strong><span>2025–2028 · Jaipur, India</span></div></div></div></div></section>;
+}
+
+export function SkillsSection() {
+  return <section className="section section-tinted"><div className="page-width"><div className="section-heading"><div><div className="section-label">02 / My skills</div><h2>What I bring to the table.</h2></div><p>People-focused skills that form the foundation of how I communicate and collaborate.</p></div><div className="skills-grid"><article className="skill-card"><div className="icon-tile"><Mic size={24}/></div><div><h3>Public Speaking</h3><p>Communication</p></div></article><article className="skill-card"><div className="icon-tile"><Users size={24}/></div><div><h3>Group Work</h3><p>Collaboration</p></div></article></div></div></section>;
+}
+
+export function ProjectsSection() {
+  return <section className="section"><div className="page-width"><div className="section-heading"><div><div className="section-label">03 / Projects</div><h2>Learning, put into practice.</h2></div></div><div className="empty-projects"><div className="icon-tile"><FolderOpen size={24}/></div><div><h3>Projects to come.</h3><p>No projects have been listed yet.</p></div></div></div></section>;
+}
+
+export function EducationSection() {
+  return <section className="section section-tinted"><div className="page-width"><div className="section-heading"><div><div className="section-label">04 / Education</div><h2>Building my foundation.</h2></div><BookOpen className="text-primary" size={30}/></div><div className="education-row"><div className="education-date">2025 — 2028</div><div><h3>Bachelor of Business Administration</h3><p>JECRC University</p><p>Jaipur, Rajasthan</p></div><span className="education-status"><span className="eyebrow-dot"/> First-year student</span></div></div></section>;
+}
+
+export function ContactSection() {
+  return <section className="section"><div className="page-width contact-grid"><div><div className="section-label">05 / Get in touch</div><h2>Let's connect.</h2><p className="body-copy mt-5">A conversation about business, analytics,<br className="hidden sm:block"/> or marketing starts here.</p></div><div className="contact-links"><a className="contact-link" href="mailto:fatehpuriajai@gmail.com"><Mail/><div><strong>Email</strong><span>fatehpuriajai@gmail.com</span></div><ArrowUpRight/></a><a className="contact-link" href="https://www.linkedin.com/feed/" target="_blank" rel="noopener noreferrer"><Linkedin/><div><strong>LinkedIn</strong><span>linkedin.com/feed</span></div><ArrowUpRight/></a><a className="contact-link" href="https://github.com" target="_blank" rel="noopener noreferrer"><Github/><div><strong>GitHub</strong><span>github.com</span></div><ArrowUpRight/></a></div></div></section>;
+}
+
+export function PageIntro({ label, title, description }: { label: string; title: string; description: string }) {
+  return <div className="page-intro"><div className="page-width reveal"><div className="section-label">Jai Fatehpuria / {label}</div><h1 className="page-title">{title}</h1><p>{description}</p></div></div>;
+}
+
+export function portfolioHead(title: string, description: string) {
+  return { meta: [{ title: `${title} | Jai Fatehpuria` }, { name: 'description', content: description }, { property: 'og:title', content: `${title} | Jai Fatehpuria` }, { property: 'og:description', content: description }, { property: 'og:type', content: 'website' }, { name: 'twitter:card', content: 'summary_large_image' }] };
+}
