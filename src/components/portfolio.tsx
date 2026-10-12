@@ -38,8 +38,8 @@ const projects = [
   },
 ] as const;
 
-export function ProjectsSection() {
-  return <section className="section"><div className="page-width"><div className="section-heading"><div><div className="section-label">03 / Projects</div><h2>Learning, put into practice.</h2></div><p>Academic work where a business idea is shaped into something presentable.</p></div><div className="projects-list">{projects.map(project => <article className="project-card" key={project.number}><div className="project-number">{project.number}</div><div><h3>{project.name}</h3><span className="project-subtitle">{project.subtitle}</span><p>{project.description}</p><div className="project-tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div></article>)}</div></div></section>;
+export function ProjectsSection({ full = false }: { full?: boolean }) {
+  return <section className="section"><div className="page-width"><div className="section-heading"><div><div className="section-label">{full ? 'Jai Fatehpuria / Projects' : '03 / Projects'}</div>{full ? <h1>Learning, put into practice.</h1> : <h2>Learning, put into practice.</h2>}</div><p>Academic work where a business idea is shaped into something presentable.</p></div><div className="projects-list">{projects.map(project => <article className="project-card" key={project.number}><div className="project-number">{project.number}</div><div><h3>{project.name}</h3><span className="project-subtitle">{project.subtitle}</span><p>{project.description}</p><div className="project-tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div></article>)}</div></div></section>;
 }
 
 export function EducationSection() {
