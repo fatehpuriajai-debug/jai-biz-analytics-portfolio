@@ -196,9 +196,14 @@ a { text-decoration: none; }
 .icon-tile { display: flex; align-items: center; justify-content: center; background: var(--secondary); color: var(--primary); width: 52px; height: 52px; border-radius: 6px; flex-shrink: 0; }
 .skill-card h3 { font-size: 17px; margin: 0; font-weight: 700; }
 .skill-card p { color: var(--muted-foreground); font-size: 11px; margin: 7px 0 0; }
-.empty-projects { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-block: 48px; display: flex; align-items: center; gap: 22px; }
-.empty-projects h3 { font-size: 18px; margin: 0 0 8px; }
-.empty-projects p { font-size: 13px; color: var(--muted-foreground); margin: 0; }
+.projects-list { display: grid; gap: 22px; }
+.project-card { display: grid; grid-template-columns: 62px 1fr; gap: 26px; border: 1px solid var(--line); background: var(--background); border-radius: 6px; padding: 30px; }
+.project-number { color: var(--primary); font-size: 12px; font-weight: 700; letter-spacing: 1.5px; }
+.project-card h3 { font-size: 21px; margin: 0; font-weight: 750; }
+.project-subtitle { display: block; color: var(--primary); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.8px; margin-top: 9px; }
+.project-card p { font-size: 14px; line-height: 1.9; color: var(--muted-foreground); margin: 18px 0 0; max-width: 640px; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 21px; }
+.project-tags span { border: 1px solid var(--line); background: var(--secondary); color: var(--primary); font-size: 11px; font-weight: 650; padding: 6px 13px; border-radius: 999px; }
 .education-row { display: grid; grid-template-columns: 180px 1fr auto; gap: 35px; border-top: 1px solid var(--line); padding-top: 34px; }
 .education-date { color: var(--primary); font-size: 14px; font-weight: 650; }
 .education-row h3 { font-size: 21px; margin: 0 0 10px; }
@@ -252,8 +257,8 @@ a { text-decoration: none; }
   .section-heading { flex-direction: column; align-items: start; gap: 15px; }
   .skill-card { padding: 24px; }
   .education-row { grid-template-columns: 1fr; gap: 20px; }
-  .empty-projects { align-items: start; padding-block: 30px; }
-  .empty-projects p { line-height: 1.8; }
+  .project-card { grid-template-columns: 1fr; gap: 12px; padding: 24px; }
+  .project-card p { margin-top: 14px; }
   .page-intro { padding-block: 50px; }
   .footer-inner { gap: 15px; flex-wrap: wrap; }
 }
