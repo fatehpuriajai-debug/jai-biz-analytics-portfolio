@@ -42,8 +42,39 @@ export function ProjectsSection({ full = false }: { full?: boolean }) {
   return <section className="section"><div className="page-width"><div className="section-heading"><div><div className="section-label">{full ? 'Jai Fatehpuria / Projects' : '03 / Projects'}</div>{full ? <h1>Learning, put into practice.</h1> : <h2>Learning, put into practice.</h2>}</div><p>Academic work where a business idea is shaped into something presentable.</p></div><div className="projects-list">{projects.map(project => <article className="project-card" key={project.number}><div className="project-number">{project.number}</div><div><h3>{project.name}</h3><span className="project-subtitle">{project.subtitle}</span><p>{project.description}</p><div className="project-tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div></article>)}</div></div></section>;
 }
 
+type EducationEntry = {
+  period: string;
+  title: string;
+  status?: string;
+  stream?: string;
+  result?: string;
+  details: [string, string][];
+};
+
+const educationEntries: EducationEntry[] = [
+  {
+    period: '2025 — 2028',
+    title: 'Bachelor of Business Administration',
+    status: 'Currently Pursuing',
+    details: [['Institution', 'JECRC University'], ['Location', 'Jaipur, Rajasthan']],
+  },
+  {
+    period: 'Class 12',
+    title: 'Senior Secondary Education',
+    stream: 'Commerce with Informatics Practices',
+    result: '86.2%',
+    details: [['Board', 'CBSE'], ['Location', 'Jaipur, Rajasthan']],
+  },
+  {
+    period: 'Class 10',
+    title: 'Secondary Education',
+    result: '86%',
+    details: [['Board', 'CBSE'], ['Location', 'Jaipur, Rajasthan']],
+  },
+];
+
 export function EducationSection() {
-  return <section className="section section-tinted"><div className="page-width"><div className="section-heading"><div><div className="section-label">04 / Education</div><h2>Building my foundation.</h2></div><BookOpen className="text-primary" size={30}/></div><div className="education-row"><div className="education-date">2025 — 2028</div><div><h3>Bachelor of Business Administration</h3><p>JECRC University</p><p>Jaipur, Rajasthan</p></div><span className="education-status"><span className="eyebrow-dot"/> First-year student</span></div></div></section>;
+  return <section className="section section-tinted"><div className="page-width"><div className="section-heading"><div><div className="section-label">04 / Education</div><h2>Building my foundation.</h2></div><BookOpen className="text-primary" size={30}/></div><div className="education-timeline">{educationEntries.map(entry => <article className="education-item" key={entry.title}><div className="education-period">{entry.period}</div><div><div className="education-head"><div><h3>{entry.title}</h3>{entry.stream && <span className="education-stream">{entry.stream}</span>}</div>{entry.result ? <span className="education-result">{entry.result}</span> : entry.status ? <span className="education-status"><span className="eyebrow-dot"/>{entry.status}</span> : null}</div><dl className="education-meta">{entry.details.map(([label, value]) => <div className="education-meta-item" key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl></div></article>)}</div></div></section>;
 }
 
 export function ContactSection() {
