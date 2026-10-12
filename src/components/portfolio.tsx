@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router';
 import { useState } from 'react';
-import { ArrowRight, ArrowUpRight, BookOpen, GraduationCap, Github, Linkedin, Mail, MapPin, Menu, Mic, Users, X, FolderOpen } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, BookOpen, GraduationCap, Github, Linkedin, Mail, Menu, Mic, Users, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const pages = [ ['Home', '/'], ['About', '/about'], ['Skills', '/skills'], ['Projects', '/projects'], ['Education', '/education'], ['Contact', '/contact'] ] as const;
@@ -28,8 +28,18 @@ export function SkillsSection() {
   return <section className="section section-tinted"><div className="page-width"><div className="section-heading"><div><div className="section-label">02 / My skills</div><h2>What I bring to the table.</h2></div><p>People-focused skills that form the foundation of how I communicate and collaborate.</p></div><div className="skills-grid"><article className="skill-card"><div className="icon-tile"><Mic size={24}/></div><div><h3>Public Speaking</h3><p>Communication</p></div></article><article className="skill-card"><div className="icon-tile"><Users size={24}/></div><div><h3>Group Work</h3><p>Collaboration</p></div></article></div></div></section>;
 }
 
+const projects = [
+  {
+    number: '01',
+    name: 'Aroma Essence',
+    subtitle: 'Perfume Brand & Marketing',
+    description: 'Created an academic perfume-branding project focused on developing the Aroma Essence brand concept and presenting its products through a marketing-oriented approach.',
+    tags: ['Academic project', 'Brand concept', 'Marketing'],
+  },
+] as const;
+
 export function ProjectsSection() {
-  return <section className="section"><div className="page-width"><div className="section-heading"><div><div className="section-label">03 / Projects</div><h2>Learning, put into practice.</h2></div></div><div className="empty-projects"><div className="icon-tile"><FolderOpen size={24}/></div><div><h3>Projects to come.</h3><p>No projects have been listed yet.</p></div></div></div></section>;
+  return <section className="section"><div className="page-width"><div className="section-heading"><div><div className="section-label">03 / Projects</div><h2>Learning, put into practice.</h2></div><p>Academic work where a business idea is shaped into something presentable.</p></div><div className="projects-list">{projects.map(project => <article className="project-card" key={project.number}><div className="project-number">{project.number}</div><div><h3>{project.name}</h3><span className="project-subtitle">{project.subtitle}</span><p>{project.description}</p><div className="project-tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div></article>)}</div></div></section>;
 }
 
 export function EducationSection() {
