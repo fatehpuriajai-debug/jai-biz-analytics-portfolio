@@ -1,0 +1,4 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { AboutSection, PageIntro, portfolioHead } from '@/components/portfolio';
+export const Route = createFileRoute('/about')({ head: () => portfolioHead('About', 'Learn about Jai Fatehpuria, his BBA studies, interests in Business Analytics and Marketing, and his MBA career goal.'), component: About });
+function About() { return <main className="detail-main"><PageIntro label="About" title="A little about me." description="A business student with an interest in analytics, marketing, and the ideas that connect them."/><AboutSection full/></main>; }
