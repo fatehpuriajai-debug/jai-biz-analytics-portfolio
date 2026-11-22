@@ -14,6 +14,60 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { PortfolioHeader, PortfolioFooter } from "@/components/portfolio";
 
+declare global {
+  interface Window {
+    VdkEdgeWebchat?: {
+      mount: (config: Record<string, unknown>) => void;
+    };
+    __botpressWebchatPromise?: Promise<void>;
+  }
+}
+
+function initializeBotpressWebchat() {
+  if (typeof window === "undefined" || typeof document === "undefined") {
+    return Promise.resolve();
+  }
+
+  if (window.__botpressWebchatPromise) return window.__botpressWebchatPromise;
+
+  window.__botpressWebchatPromise = (async () => {
+    const stylesheetUrl = "https://vdk-viber-runtime-prod.bot.botpress.host/edge/webchat.css";
+    const scriptUrl = "https://vdk-viber-runtime-prod.bot.botpress.host/edge/webchat.js";
+    const baseUrl = "https://vdk-viber-runtime-prod.bot.botpress.host";
+    const botId = "a055e2a5-c409-48d2-a9f8-777c20c3b752";
+
+    if (!document.getElementById("botpress-webchat-styles")) {
+      const stylesheet = document.createElement("link");
+      stylesheet.id = "botpress-webchat-styles";
+      stylesheet.rel = "stylesheet";
+      stylesheet.href = stylesheetUrl;
+      document.head.appendChild(stylesheet);
+    }
+
+    if (!window.VdkEdgeWebchat) {
+      const script = document.createElement("script");
+      script.src = scriptUrl;
+      script.async = true;
+      await new Promise<void>((resolve, reject) => {
+        script.onload = () => resolve();
+        script.onerror = () => reject(new Error("Botpress webchat script could not be loaded."));
+        document.head.appendChild(script);
+      });
+    }
+
+    const webchat = window.VdkEdgeWebchat;
+    if (!webchat) throw new Error("Botpress webchat is unavailable.");
+
+    const response = await fetch(`${baseUrl}/edge/bots/${botId}/config`);
+    if (!response.ok) throw new Error("Botpress webchat configuration could not be loaded.");
+    const { webchat: config } = (await response.json()) as { webchat: Record<string, unknown> };
+
+    webchat.mount({ ...config, mode: "bubble", baseUrl, botId });
+  })();
+
+  return window.__botpressWebchatPromise;
+}
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -118,6 +172,10 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => {
+    void initializeBotpressWebchat().catch(() => undefined);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
