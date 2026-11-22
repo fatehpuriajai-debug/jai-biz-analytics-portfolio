@@ -186,6 +186,10 @@ a { text-decoration: none; }
 .section-heading > p { max-width: 350px; font-size: 15px; line-height: 1.8; color: var(--muted-foreground); margin: 0; }
 .about-grid { display: grid; grid-template-columns: 1fr 1.15fr; gap: 90px; }
 .body-copy { font-size: 16px; color: var(--muted-foreground); line-height: 1.85; margin: 0 0 20px; }
+.course-assistant { padding-block: 38px; }
+.course-assistant-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; }
+.course-assistant h2 { flex: 0 0 auto; font-size: 24px; }
+.course-assistant p { max-width: 650px; margin: 0; color: var(--muted-foreground); font-size: 15px; line-height: 1.7; }
 .text-link { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: var(--primary); }
 .fact-row { display: flex; gap: 14px; padding-top: 22px; border-top: 1px solid var(--line); }
 .fact-row svg { color: var(--primary); }
@@ -260,7 +264,10 @@ a { text-decoration: none; }
   .interest-line { font-size: 11px; gap: 8px; }
   .hero-actions a { padding-inline: 18px; }
   .section { padding-block: 52px; }
+  .course-assistant { padding-block: 34px; }
+  .course-assistant-inner { align-items: flex-start; flex-direction: column; gap: 11px; }
   .section h2, .section h1, .page-title { font-size: 30px; }
+  .course-assistant h2 { font-size: 22px; }
   .about-grid, .contact-grid, .skills-grid { grid-template-columns: 1fr; gap: 26px; }
   .section-heading { flex-direction: column; align-items: start; gap: 15px; }
   .skill-card { padding: 24px; }
